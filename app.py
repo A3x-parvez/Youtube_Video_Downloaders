@@ -59,7 +59,7 @@ def download_video():
     ydl_opts = {
         'format': format_id,
         'noplaylist': True,
-        'cookiefile': 'chrome',  # Extract cookies from Chrome browser
+        'cookiefile': 'youtube_cookies.txt',  # Extract cookies from Chrome browser
     }
 
     try:
