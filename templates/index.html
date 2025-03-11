@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Downloader</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #1a202c; /* Dark gray background */
+        }
+        .container {
+            background-color: #2d3748; /* Slightly lighter gray for contrast */
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-white flex items-center justify-center min-h-screen">
+
+    <div class="container w-full max-w-lg p-6 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-semibold text-center mb-4">YouTube Video Downloader</h1>
+        
+        <div class="mb-4">
+            <input id="urlInput" type="text" placeholder="Enter YouTube Video URL" 
+                class="w-full p-3 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        
+        <div class="flex space-x-2">
+            <button id="fetchFormatsBtn" 
+                class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition">
+                Fetch Video Formats
+            </button>
+            <button id="cancelFetchBtn" 
+                class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition hidden">
+                Cancel
+            </button>
+        </div>
+
+        <!-- Loading Animation for Fetch Button -->
+        <div id="loading" class="hidden mt-3 text-center">
+            <svg class="animate-spin h-6 w-6 mx-auto text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+            </svg>
+            <p class="text-sm text-gray-400 mt-1">Fetching video formats...</p>
+        </div>
+
+        <p id="message" class="text-sm text-gray-400 mt-3 text-center"></p>
+
+        <!-- Video Preview -->
+        <div id="videoPreview" class="hidden mt-4">
+            <img id="thumbnail" class="w-full rounded-md" alt="Video Thumbnail">
+            <select id="formatSelect" class="w-full p-3 bg-gray-700 text-white rounded-md mt-4"></select>
+            <a id="downloadBtn" class="block w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 text-center transition">
+                Download Selected Format
+            </a>
+            
+            <!-- Loading Animation for Download Button -->
+            <div id="downloadLoading" class="hidden mt-3 text-center">
+                <svg class="animate-spin h-6 w-6 mx-auto text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+                <p class="text-sm text-gray-400 mt-1">Starting download...</p>
+            </div>
+        </div>
+
+        <!-- Main Cancel & Refresh Button (Red Background) -->
+        <div class="flex space-x-2 mt-4">
+            <button id="mainCancelBtn" 
+                class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition">
+                Cancel & Refresh
+            </button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
